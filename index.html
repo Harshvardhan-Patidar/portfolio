@@ -215,7 +215,149 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: white;
+            background: rgba(37,99,235,0.15);
+            border: 1px solid rgba(37,99,235,0.4);
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s;
         }
+        .mobile-toggle:hover { background: rgba(37,99,235,0.35); }
+
+        /* ===== ADVANCED ANIMATIONS ===== */
+        @keyframes floatY {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-18px); }
+        }
+        @keyframes ringPulse {
+            0%,100%{ box-shadow: 0 0 0 0 rgba(37,99,235,0.6), 0 0 0 0 rgba(124,58,237,0.4); }
+            50%{ box-shadow: 0 0 0 14px rgba(37,99,235,0), 0 0 0 28px rgba(124,58,237,0); }
+        }
+        @keyframes gradientShift {
+            0%{ background-position: 0% 50%; }
+            50%{ background-position: 100% 50%; }
+            100%{ background-position: 0% 50%; }
+        }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+        @keyframes slideInLeft { from{opacity:0;transform:translateX(-60px);} to{opacity:1;transform:translateX(0);} }
+        @keyframes slideInRight { from{opacity:0;transform:translateX(60px);} to{opacity:1;transform:translateX(0);} }
+        @keyframes zoomIn { from{opacity:0;transform:scale(0.7);} to{opacity:1;transform:scale(1);} }
+        @keyframes shimmer {
+            0%{ background-position: -200% center; }
+            100%{ background-position: 200% center; }
+        }
+        @keyframes orbit {
+            0%{ transform: rotate(0deg) translateX(140px) rotate(0deg); }
+            100%{ transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+        }
+        @keyframes particleDrift {
+            0%{ transform: translateY(0) translateX(0); opacity: 0.8; }
+            100%{ transform: translateY(-100vh) translateX(30px); opacity: 0; }
+        }
+
+        /* Particles background */
+        .particles-bg {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            pointer-events:none; z-index:0; overflow:hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 3px; height: 3px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: particleDrift linear infinite;
+            opacity: 0.6;
+        }
+
+        /* Hero layout - split with photo */
+        .hero .container { width: 100%; }
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+        .hero-content { max-width: 600px; animation: slideInLeft 0.9s ease forwards; }
+
+        /* Circular profile photo */
+        .hero-photo-wrap {
+            flex-shrink: 0;
+            animation: slideInRight 0.9s ease forwards;
+        }
+        .hero-photo-ring {
+            position: relative;
+            width: 280px; height: 280px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            animation: floatY 4s ease-in-out infinite, ringPulse 3s ease-in-out infinite;
+        }
+        .hero-photo-ring img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            border: 4px solid var(--darker);
+        }
+        /* Orbiting dot */
+        .orbit-dot {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--secondary);
+            box-shadow: 0 0 10px var(--secondary);
+            animation: orbit 6s linear infinite;
+            transform-origin: 0 0;
+        }
+        .orbit-dot-2 {
+            animation: orbit 9s linear infinite reverse;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Typing cursor */
+        .typed-cursor { animation: blink 1s infinite; color: var(--primary); }
+
+        /* Shimmer btn */
+        .btn-resume {
+            background: linear-gradient(270deg, var(--secondary), var(--primary), var(--secondary));
+            background-size: 300% 300%;
+            animation: gradientShift 3s ease infinite;
+            color: white;
+            border: none;
+        }
+        .btn-resume:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(124,58,237,0.45);
+        }
+
+        /* Card hover glow */
+        .skill-category:hover { box-shadow: 0 0 25px rgba(37,99,235,0.25); }
+        .cert-card:hover { box-shadow: 0 0 25px rgba(37,99,235,0.25); }
+        .project-card:hover { box-shadow: 0 0 30px rgba(37,99,235,0.2); }
+
+        /* Section animated underline */
+        h2 { animation: none; }
+        h2:after { transition: width 0.4s; }
+
+        /* Timeline glow */
+        .timeline-content { transition: box-shadow 0.3s, transform 0.3s; }
+        .timeline-content:hover { box-shadow: 0 0 25px rgba(37,99,235,0.2); transform: translateX(5px); }
+
+        /* Scroll-to-top button */
+        #scrollTop {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; cursor: pointer; z-index: 999;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.3s; border: none; box-shadow: 0 5px 20px rgba(37,99,235,0.4);
+        }
+        #scrollTop.visible { opacity: 1; transform: translateY(0); }
+        #scrollTop:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(37,99,235,0.6); }
 
         /* Hero Section */
         .hero {
@@ -239,7 +381,7 @@
         }
 
         .hero-content {
-            max-width: 700px;
+            max-width: 600px;
         }
 
         .hero-badge {
@@ -847,100 +989,68 @@
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 992px) {
-            h1 {
-                font-size: 3rem;
-            }
-
-            h2 {
-                font-size: 2.2rem;
-            }
-
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.2rem; }
+            .about-content, .contact-container { grid-template-columns: 1fr; gap: 40px; }
+            .hero-inner { gap: 40px; }
+            .hero-photo-ring { width: 230px; height: 230px; }
         }
 
         @media (max-width: 768px) {
-            .mobile-toggle {
-                display: block;
-            }
+            .mobile-toggle { display: flex; }
 
+            /* Mobile nav dropdown */
             .nav-links {
                 position: fixed;
-                top: 80px;
+                top: 0;
                 left: 0;
                 width: 100%;
-                background: rgba(15, 23, 42, 0.98);
+                height: 100vh;
+                background: rgba(2, 6, 23, 0.98);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
                 align-items: center;
-                padding: 30px;
-                gap: 25px;
-                transform: translateY(-100%);
+                justify-content: center;
+                gap: 30px;
+                transform: translateX(100%);
                 opacity: 0;
-                transition: all 0.3s;
+                transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s;
                 pointer-events: none;
+                z-index: 999;
             }
-
             .nav-links.active {
-                transform: translateY(0);
+                transform: translateX(0);
                 opacity: 1;
                 pointer-events: all;
             }
+            .nav-links a { font-size: 1.4rem; }
 
-            .hero-actions {
-                flex-direction: column;
-                align-items: flex-start;
+            /* Stack hero */
+            .hero-inner {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 40px;
             }
-
-            .hero-stats {
-                gap: 30px;
-            }
-
-            .about-highlights {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline:before {
-                left: 30px;
-            }
-
-            .timeline-item {
-                padding-left: 70px;
-            }
-
-            .timeline-date {
-                width: 60px;
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
+            .hero-photo-ring { width: 200px; height: 200px; }
+            .hero-actions { justify-content: center; flex-wrap: wrap; }
+            .hero-stats { justify-content: center; gap: 30px; }
+            .about-highlights { grid-template-columns: 1fr; }
+            .timeline:before { left: 30px; }
+            .timeline-item { padding-left: 70px; }
+            .timeline-date { width: 60px; padding: 6px 10px; font-size: 0.8rem; }
         }
 
         @media (max-width: 576px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 70px 0;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.9rem; }
+            section { padding: 70px 0; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; gap: 30px; text-align: center; }
+            .hero-photo-ring { width: 170px; height: 170px; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .btn { font-size: 0.95rem; padding: 12px 24px; }
         }
 
         /* Animations */
@@ -955,6 +1065,8 @@
 </head>
 
 <body>
+    <!-- Particles Background -->
+    <div class="particles-bg" id="particlesBg"></div>
     <!-- Header -->
     <header>
         <div class="container">
@@ -985,46 +1097,61 @@
     <section id="home" class="hero">
         <div class="hero-bg"></div>
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge" data-aos="fade-up">
-                    <span class="dot"></span>
-                    Full Stack Developer
+            <div class="hero-inner">
+                <!-- Left: Text Content -->
+                <div class="hero-content">
+                    <div class="hero-badge" data-aos="fade-up">
+                        <span class="dot"></span>
+                        Full Stack Developer
+                    </div>
+
+                    <h1 data-aos="fade-up" data-aos-delay="100">
+                        Hey there, I'm <span id="typedName"></span><span class="typed-cursor">|</span> 👋
+                    </h1>
+
+                    <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+                        I'm a passionate Full Stack Developer with hands-on experience in building scalable web
+                        applications, implementing modern development practices, and creating seamless user experiences.
+                    </p>
+
+                    <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Let's Connect
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">
+                            <i class="fas fa-code"></i> View Projects
+                        </a>
+                        <a href="Harsh_resume.pdf" target="_blank" class="btn btn-resume">
+                            <i class="fas fa-file-pdf"></i> View Resume
+                        </a>
+                    </div>
+
+                    <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Internships</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label">Achievements</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">4+</span>
+                            <span class="stat-label">Key Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">1 Live</span>
+                            <span class="stat-label">SaaS Startup</span>
+                        </div>
+                    </div>
                 </div>
 
-                <h1 data-aos="fade-up" data-aos-delay="100">
-                    Hey there, I'm <span>Harshvardhan Patidar</span> 👋
-                </h1>
-
-                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
-                    I'm a passionate Full Stack Developer with hands-on experience in building scalable web
-                    applications, implementing modern development practices, and creating seamless user experiences.
-                </p>
-
-                <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> Let's Connect
-                    </a>
-                    <a href="#projects" class="btn btn-secondary">
-                        <i class="fas fa-code"></i> View Projects
-                    </a>
-                </div>
-
-                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
-                    <div class="stat">
-                        <span class="stat-number">3+</span>
-                        <span class="stat-label">Internships</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Achievements</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">4+</span>
-                        <span class="stat-label">Key Projects</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">1 Live</span>
-                        <span class="stat-label">SaaS Startup</span>
+                <!-- Right: Circular Photo -->
+                <div class="hero-photo-wrap" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="hero-photo-ring">
+                        <span class="orbit-dot"></span>
+                        <span class="orbit-dot orbit-dot-2"></span>
+                        <img src="myPhoto.PNG" alt="Harshvardhan Patidar">
                     </div>
                 </div>
             </div>
@@ -1645,7 +1772,66 @@
         // Update copyright year
         document.querySelector('.footer-bottom p').innerHTML =
             document.querySelector('.footer-bottom p').innerHTML.replace('2025', new Date().getFullYear());
+        // ===== TYPING ANIMATION =====
+        (function(){
+            const el = document.getElementById('typedName');
+            const text = 'Harshvardhan Patidar';
+            let i = 0;
+            function type() {
+                if (i <= text.length) {
+                    el.textContent = text.slice(0, i++);
+                    setTimeout(type, 70);
+                }
+            }
+            setTimeout(type, 600);
+        })();
+
+        // ===== PARTICLES =====
+        (function(){
+            const bg = document.getElementById('particlesBg');
+            if (!bg) return;
+            for (let i = 0; i < 40; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 3 + 1;
+                p.style.cssText = [
+                    `width:${size}px`, `height:${size}px`,
+                    `left:${Math.random()*100}%`,
+                    `top:${Math.random()*100}%`,
+                    `animation-duration:${Math.random()*15+8}s`,
+                    `animation-delay:${Math.random()*10}s`,
+                    `opacity:${Math.random()*0.5+0.2}`,
+                    `background:${Math.random()>0.5?'#2563eb':'#7c3aed'}`
+                ].join(';');
+                bg.appendChild(p);
+            }
+        })();
+
+        // ===== SCROLL TO TOP =====
+        (function(){
+            const btn = document.getElementById('scrollTop');
+            if (!btn) return;
+            window.addEventListener('scroll', () => {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+            btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+        })();
+
+        // ===== ACTIVE NAV HIGHLIGHT =====
+        (function(){
+            const sections = document.querySelectorAll('section[id]');
+            const links = document.querySelectorAll('.nav-links a');
+            window.addEventListener('scroll', () => {
+                let cur = '';
+                sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+                links.forEach(a => {
+                    a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--primary)' : '';
+                });
+            });
+        })();
     </script>
+    <!-- Scroll-to-Top Button -->
+    <button id="scrollTop" title="Back to top"><i class="fas fa-chevron-up"></i></button>
 </body>
 
 </html>
