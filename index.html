@@ -34,6 +34,8 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -41,6 +43,7 @@
             color: var(--light);
             line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
         }
 
         .container {
@@ -150,7 +153,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 1001; /* Set higher than nav-links */
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             padding: 20px 0;
@@ -991,7 +994,7 @@
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 992px) {
-            h1 { font-size: 3rem; }
+            h1, .hero h1 { font-size: 3rem; }
             h2 { font-size: 2.2rem; }
             .about-content, .contact-container { grid-template-columns: 1fr; gap: 40px; }
             .hero-inner { gap: 40px; }
@@ -1043,7 +1046,7 @@
         }
 
         @media (max-width: 576px) {
-            h1 { font-size: 2.2rem; }
+            h1, .hero h1 { font-size: 2.2rem; }
             h2 { font-size: 1.9rem; }
             section { padding: 70px 0; }
             .projects-grid { grid-template-columns: 1fr; }
@@ -1051,6 +1054,9 @@
             .hero-photo-ring { width: 170px; height: 170px; }
             .hero-actions { flex-direction: column; align-items: center; }
             .btn { font-size: 0.95rem; padding: 12px 24px; }
+            .contact-info, .contact-form { padding: 25px 20px; }
+            .contact-item { flex-direction: column; text-align: center; gap: 10px; }
+            .contact-item p { word-break: break-word; font-size: 0.95rem; }
         }
 
         /* Animations */
